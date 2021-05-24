@@ -29,7 +29,6 @@ public class TasksTest {
 			//		action.clickAndHold(addTodoButton).build().perform();
 			driver.findElement(By.id("task")).sendKeys("Task automática2");
 			String data = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-			System.out.println("Data enviada"+data);
 			driver.findElement(By.id("dueDate")).sendKeys(data);
 			Thread.sleep(2000l);
 			driver.findElement(By.id("saveButton")).submit();
