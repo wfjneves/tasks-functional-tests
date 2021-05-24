@@ -4,6 +4,8 @@ import static org.junit.Assert.assertThat;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
 import org.hamcrest.CoreMatchers;
@@ -26,7 +28,9 @@ public class TasksTest {
 			addTodoButton.click();
 			//		action.clickAndHold(addTodoButton).build().perform();
 			driver.findElement(By.id("task")).sendKeys("Task automática2");
-			driver.findElement(By.id("dueDate")).sendKeys("07/05/2021");
+			String data = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+			System.out.println("Data enviada"+data);
+			driver.findElement(By.id("dueDate")).sendKeys(data);
 			Thread.sleep(2000l);
 			driver.findElement(By.id("saveButton")).submit();
 			String mensagemRetornada = driver.findElement(By.id("message")).getText();
