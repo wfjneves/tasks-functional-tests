@@ -19,7 +19,7 @@ public class HelthCheckIT {
 		WebDriver driver = new RemoteWebDriver(new URL("http://192.168.1.6:4444/wd/hub"), DesiredCapabilities.chrome());
 		try {
 			driver.navigate().to("http://192.168.1.6:9999/tasks");
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 			driver.manage().window().maximize();
 			String version = driver.findElement(By.id("version")).getText();
 			Assert.assertTrue(version.startsWith("build"));
