@@ -41,6 +41,36 @@ public class TasksTest {
 	}
 	
 	@Test
+	public void deveRemoverTarefaComSucesso() throws InterruptedException, MalformedURLException {
+		WebDriver driver = acessarAplicacao();
+		try {
+			//Insere registro
+			
+			WebElement addTodoButton = driver.findElement(By.id("addTodo"));
+			Thread.sleep(2000l);
+			addTodoButton.click();
+			Thread.sleep(2000l);
+			//		action.clickAndHold(addTodoButton).build().perform();
+			driver.findElement(By.id("task")).sendKeys("Task automática2");
+			String data = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+			driver.findElement(By.id("dueDate")).sendKeys(data);
+			driver.findElement(By.id("saveButton")).submit();
+			Thread.sleep(2000l);
+			String mensagemRetornada = driver.findElement(By.id("message")).getText();
+			assertThat("Success!", CoreMatchers.is(mensagemRetornada));
+			
+			//Remover
+			driver.findElement(By.xpath("//a[@class='btn btn-outline-danger btn-sm']")).click();
+			
+			mensagemRetornada = driver.findElement(By.id("message")).getText();
+			assertThat("Success!", CoreMatchers.is(mensagemRetornada));
+			
+		} finally {
+			driver.quit();
+		} 
+	}
+	
+	@Test
 	public void naoDeveSalvarTarefaSemDescricao() throws InterruptedException, MalformedURLException {
 		WebDriver driver = acessarAplicacao();
 		try {
